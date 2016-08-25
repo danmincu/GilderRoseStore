@@ -56,17 +56,6 @@ namespace GilderRoseStore.Tests.Integration
         [TestMethod]
         public void TestGetValuesWithNoAuth()
         {
-            //using (var server = TestServer.Create<Startup>())
-            //{
-            //    using (var client = new HttpClient(server.Handler))
-            //    {
-            //        var response = server.HttpClient.GetAsync("/api/values").Result;
-            //        //var response = client.GetAsync("/api/values").Result;
-            //        var result1 = response.Content.ReadAsStringAsync().Result;
-            //        Assert.IsNotNull(result1);
-            //    }
-            //}            
-
             var result = GetInventory(null);
             Assert.AreEqual(result.Item2, System.Net.HttpStatusCode.Unauthorized);
         }
