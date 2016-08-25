@@ -17,8 +17,10 @@ class Item
 }
 ```
 The app exposes two endpoints
+```xml
   ..\api\store - retrieves the current inventory - list of items and the quantity
   ..\api\store\get\{id} - buys and item from the store and decreases the current stock. Id represents the Guid Id of the desired item.
+```
 
 I didn't focus on the business layer to add customer/orders/purchase history
   
