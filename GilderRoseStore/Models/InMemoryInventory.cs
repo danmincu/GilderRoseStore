@@ -17,6 +17,7 @@ namespace GilderRoseStore.Models
         }
         
         ConcurrentBag<Item> items = new ConcurrentBag<Item>();
+        private object _sync = new object();
         public IEnumerable<Item> Items
         {
             get
@@ -26,24 +27,17 @@ namespace GilderRoseStore.Models
         }
 
         public bool BuyItem(Guid itemId)
-        {
-            var item = items.FirstOrDefault(itm => itm.Id.Equals(itemId));
-            //thread safe checking an item quantity is greater than zero
-            //the item is checked than removed from the list to insure is not being altered by concurrent threads
-            //and only than is safely added back to the concurrent bag
-            if (item != null && item.Quantity > 0 && items.TryTake(out item))
+        {            
+            var item = items.FirstOrDefault(itm => itm.Id == itemId);
+            lock (_sync)
             {
-                if (item.Quantity == 0)
+                if (item != null && item.Quantity > 0)
                 {
-                    items.Add(item);
-                    return false;
+                    item.Quantity--;                
+                    return true;
                 }
-                item.Quantity--;
-                items.Add(item);
-                return true;
+                return false;
             }
-            return false;
-
         }
     }
 }

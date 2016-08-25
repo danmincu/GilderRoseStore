@@ -8,19 +8,24 @@ using System.Web.Http;
 
 namespace GilderRoseStore.Controllers
 {
-   // [Authorize]
+    [Authorize]
     public class StoreController : ApiController
     {
-        public IEnumerable<Item> Get()
+        private readonly IInventory inventory;
+
+        public StoreController(IInventory inventory)
         {
-            var imi = new InMemoryInventory();
-            return imi.Items;
+            this.inventory = inventory;
+        }
+
+        public IEnumerable<Item> Get()
+        {            
+            return inventory.Items;
         }
 
         public bool Get(Guid id)
         {
-            var imi = new InMemoryInventory();
-            return imi.BuyItem(id);
+            return inventory.BuyItem(id);
         }
 
     }

@@ -7,6 +7,13 @@ using System.Globalization;
 using System.Net.Http.Headers;
 using GilderRoseStore.Models;
 using System.Linq;
+using Owin;
+using System.Web.Http;
+using Microsoft.Owin.Testing;
+using System.Web.Http.Dispatcher;
+using Microsoft.Owin;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace GilderRoseStore.Tests.Integration
 {
@@ -47,14 +54,25 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
-        public void GetValuesWithNoAuthTest()
+        public void TestGetValuesWithNoAuth()
         {
+            //using (var server = TestServer.Create<Startup>())
+            //{
+            //    using (var client = new HttpClient(server.Handler))
+            //    {
+            //        var response = server.HttpClient.GetAsync("/api/values").Result;
+            //        //var response = client.GetAsync("/api/values").Result;
+            //        var result1 = response.Content.ReadAsStringAsync().Result;
+            //        Assert.IsNotNull(result1);
+            //    }
+            //}            
+
             var result = GetInventory(null);
             Assert.AreEqual(result.Item2, System.Net.HttpStatusCode.Unauthorized);
         }
 
         [TestMethod]
-        public void GetInventoryTest()
+        public void TestGetInventory()
         {
             Assert.IsNotNull(InsureCreateUser());
             var token = GetToken(userName, password);
@@ -68,7 +86,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
-        public void BuyAnItemUntilEmptyStockTest()
+        public void TestBuyAnItemUntilTheStockIsEmpty()
         {
             Assert.IsNotNull(InsureCreateUser());
             var token = GetToken(userName, password);
@@ -79,16 +97,19 @@ namespace GilderRoseStore.Tests.Integration
             var items = new JavaScriptSerializer().Deserialize<IEnumerable<Item>>(result.Item1);
             Assert.IsNotNull(items);
             Assert.IsTrue(items.Any());
-            var firstItemId = items.First().Id;
-            result = BuyItem(token, firstItemId);
-            Assert.IsNotNull(result);
+            var firstItem = items.OrderBy(itm => itm.Quantity).First();
+            for (int i = 0; i < firstItem.Quantity; i++)
+            {
+                result = BuyItem(token, firstItem.Id);
+                Assert.IsTrue(result.Item1.Equals("true", StringComparison.OrdinalIgnoreCase));
+            }
+            result = BuyItem(token, firstItem.Id);
+            Assert.IsTrue(result.Item1.Equals("false", StringComparison.OrdinalIgnoreCase));
         }
-
 
 
         static Tuple<string, System.Net.HttpStatusCode> GetInventory(Token token)
         {
-
             var client = new HttpClient();
             var request = new HttpRequestMessage()
             {

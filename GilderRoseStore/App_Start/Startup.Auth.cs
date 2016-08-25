@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using GilderRoseStore.Providers;
 using GilderRoseStore.Models;
+using System.Web.Http;
 
 namespace GilderRoseStore
 {
