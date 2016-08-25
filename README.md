@@ -6,6 +6,7 @@ API requirements
 - Buy an item (user must be authenticated)
 
 Here is the definition for an item:
+```xml
 class Item
 {
   public Guid Id { get; set;}
@@ -14,7 +15,7 @@ class Item
   public int Price { get; set; }
   public int Quantity { get; set;}
 }
-
+```
 The app exposes two endpoints
   ..\api\store - retrieves the current inventory - list of items and the quantity
   ..\api\store\get\{id} - buys and item from the store and decreases the current stock. Id represents the Guid Id of the desired item.
