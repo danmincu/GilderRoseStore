@@ -17,8 +17,12 @@ using System.Diagnostics;
 
 namespace GilderRoseStore.Tests.Integration
 {
+
+    //AGAINST A REAL HOST INTEGRATION TESTS
+    //MAKE SURE YOU RUN WITH NO DEBUG (CTRL + F5) THE GilderRoseStore WEB APP BEFORE RUNNING THESE TESTS
+
     [TestClass]
-    public class IntegrationTests
+    public class AgainsHostIntegrationTests
     {
         const int port = 19683;
         const string userName = "test@test.com";

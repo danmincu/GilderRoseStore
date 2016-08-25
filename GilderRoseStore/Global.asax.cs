@@ -15,7 +15,7 @@ namespace GilderRoseStore
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        protected void Application_Start()
+        protected void Hosted_In_IIS_Application_Start()
         {
             var builder = new ContainerBuilder();
             // Get your HttpConfiguration.
@@ -37,6 +37,14 @@ namespace GilderRoseStore
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        //modified for self host and ability to integration test
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
