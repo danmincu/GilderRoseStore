@@ -21,3 +21,4 @@ The app exposes two endpoints
 
 I didn't focus on the business layer to add customer/orders/purchase history
   
+Focus on Authorization / Testability / Dependecy Injection / Ability to self host
