@@ -60,12 +60,32 @@ namespace GilderRoseStore.Tests.Integration
         [TestMethod]
         public void TestGetValuesWithNoAuth()
         {
+            //no auth
             var result = GetInventory(null);
+            Assert.IsFalse(string.IsNullOrEmpty(result.Item1));
+            var items = new JavaScriptSerializer().Deserialize<IEnumerable<Item>>(result.Item1);
+            Assert.IsNotNull(items);
+            Assert.IsTrue(items.Any());
+        }
+
+        [TestMethod]
+        public void TestBuyItemWithNoAuth()
+        {
+            Assert.IsNotNull(InsureCreateUser());
+            //no auth
+            var result = GetInventory(null);
+            Assert.IsFalse(string.IsNullOrEmpty(result.Item1));
+            var items = new JavaScriptSerializer().Deserialize<IEnumerable<Item>>(result.Item1);
+            Assert.IsNotNull(items);
+            Assert.IsTrue(items.Any());
+            var firstItem = items.OrderBy(itm => itm.Quantity).First();
+            result = BuyItem(null, firstItem.Id);
+            Assert.IsNotNull(result);
             Assert.AreEqual(result.Item2, System.Net.HttpStatusCode.Unauthorized);
         }
 
         [TestMethod]
-        public void TestGetInventory()
+        public void TestGetInventoryAuth()
         {
             Assert.IsNotNull(InsureCreateUser());
             var token = GetToken(userName, password);

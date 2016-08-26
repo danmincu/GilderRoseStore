@@ -26,9 +26,9 @@ namespace GilderRoseStore.Models
             }
         }
 
-        public bool BuyItem(Guid itemId)
+        public bool BuyItem(Guid itemId, out Item item)
         {            
-            var item = items.FirstOrDefault(itm => itm.Id == itemId);
+            item = items.FirstOrDefault(itm => itm.Id == itemId);
             lock (_sync)
             {
                 if (item != null && item.Quantity > 0)

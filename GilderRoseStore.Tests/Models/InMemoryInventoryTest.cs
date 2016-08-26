@@ -29,14 +29,16 @@ namespace GilderRoseStore.Tests.Models
             var firstLowStockItem = imi.Items.OrderBy(itm => itm.Quantity).FirstOrDefault();
             Assert.IsNotNull(firstLowStockItem);
             var initialQuanity = firstLowStockItem.Quantity;
+            Item item;
             //iterate the BuyItem method until the stock is depleted
             for (var i = 0; i < initialQuanity ; i++)
             {
+                
                 //assert the purchase succeeds
-                Assert.IsTrue(imi.BuyItem(firstLowStockItem.Id));
+                Assert.IsTrue(imi.BuyItem(firstLowStockItem.Id, out item));
             }
             //assert that attempting to buy an item when stock depleted is not possible
-            Assert.IsFalse(imi.BuyItem(firstLowStockItem.Id));
+            Assert.IsFalse(imi.BuyItem(firstLowStockItem.Id, out item));
         }
 
 
@@ -48,6 +50,7 @@ namespace GilderRoseStore.Tests.Models
             //capped to 20 as we will spawn a thread count based on this number
             var mostNumerousStockItem = imi.Items.Where(itm => itm.Quantity < 20).OrderByDescending(itm => itm.Quantity).FirstOrDefault();
             Assert.IsNotNull(mostNumerousStockItem);
+            Item item;
 
             var initialQuantity = mostNumerousStockItem.Quantity;
             var tasks = new List<Task<bool>>();
@@ -55,7 +58,7 @@ namespace GilderRoseStore.Tests.Models
             //spawn double the quantity amount of threads to insure some threads will attempt to buy after the stock depleted
             for (int i = 0; i < 2 * initialQuantity; i++)
             {
-                tasks.Add(Task.Run(() => imi.BuyItem(mostNumerousStockItem.Id)));
+                tasks.Add(Task.Run(() => imi.BuyItem(mostNumerousStockItem.Id, out item)));
             }
             Task.WhenAll(tasks).Wait();
             //assert that the amount of bought items matches the inventory count

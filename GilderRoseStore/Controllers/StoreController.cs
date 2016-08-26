@@ -12,12 +12,15 @@ namespace GilderRoseStore.Controllers
     public class StoreController : ApiController
     {
         private readonly IInventory inventory;
+        private readonly IPurchaseHistory purchaseHistory;
 
-        public StoreController(IInventory inventory)
+        public StoreController(IInventory inventory, IPurchaseHistory purchaseHistory)
         {
             this.inventory = inventory;
+            this.purchaseHistory = purchaseHistory;
         }
 
+        [AllowAnonymous]
         public IEnumerable<Item> Get()
         {            
             return inventory.Items;
@@ -25,7 +28,11 @@ namespace GilderRoseStore.Controllers
 
         public bool Get(Guid id)
         {
-            return inventory.BuyItem(id);
+            Item item;
+            var result = inventory.BuyItem(id, out item);
+            if (result)
+                this.purchaseHistory.AddEntry(User.Identity.Name, item);
+            return result;
         }
 
     }

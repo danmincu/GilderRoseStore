@@ -9,7 +9,7 @@ namespace GilderRoseStore.Models
     public interface IInventory
     {
         IEnumerable<Item> Items { get; }
-        bool BuyItem(Guid itemId);
+        bool BuyItem(Guid itemId, out Item item);
     }
 
 }

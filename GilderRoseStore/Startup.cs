@@ -44,35 +44,7 @@ namespace GilderRoseStore
 
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-            
-            //var oauthProvider = new OAuthAuthorizationServerProvider
-            //{
-            //    OnGrantResourceOwnerCredentials = async context =>
-            //    {
-            //        if (context.UserName == userName && context.Password == password)
-            //        {
-            //            var claimsIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
-            //            claimsIdentity.AddClaim(new Claim("user", context.UserName));
-            //            context.Validated(claimsIdentity);
-            //            return;
-            //        }
-            //        context.Rejected();
-            //    },
-            //    OnValidateClientAuthentication = async context =>
-            //    {
-            //        context.Validated();
 
-            //        //string clientId;
-            //        //string clientSecret;
-            //        //if (context.TryGetBasicCredentials(out clientId, out clientSecret))
-            //        //{
-            //        //    if (clientId == "xyz" && clientSecret == "secretKey")
-            //        //    {
-            //        //        context.Validated();
-            //        //    }
-            //        //}
-            //    }
-            //};
             Startup.PublicClientId = "self";
             var oauthProvider = new ApplicationOAuthProvider(Startup.PublicClientId);
 
@@ -91,24 +63,30 @@ namespace GilderRoseStore
 
             var config = new HttpConfiguration();
 
+            #region Dependecy injection container
 
             var builder = new ContainerBuilder();
-            //    // Get your HttpConfiguration.
-            //   var config1 = GlobalConfiguration.Configuration;
+            //register the inventory as a singleton
             builder.RegisterInstance(new InMemoryInventory()).As<IInventory>();
+            //register the purchase history as a type - so a new instance gets created per use. 
+            //no particular reason for this choice, I've done in only because the class is a stub that logs a message
+            builder.RegisterType<PurchaseHistoryStub>().As<IPurchaseHistory>();
             builder.RegisterType<StoreController>();
+            
 
-            //    //Register all Web API controllers.
-            //    //builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            //Register all Web API controllers.
+            //builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
             //register individual controlllers manually.
             builder.RegisterType<StoreController>().InstancePerRequest();
 
-            //    // OPTIONAL: Register the Autofac filter provider.
+            // OPTIONAL: Register the Autofac filter provider.
             builder.RegisterWebApiFilterProvider(config);
-            //    // Set the dependency resolver to be Autofac.
+            // Set the dependency resolver to be Autofac.
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
+            #endregion
 
             config.MapHttpAttributeRoutes();
 
