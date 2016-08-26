@@ -65,7 +65,7 @@ Running the code:
 </ArrayOfItem>
 ```
 what is happening in these tests? 
- - crazy code coverage
+ - wicked code coverage
  - a "test@test.com" user with the password "GilderRose1@" is created & the processes are spawning LocalDb catalogs to hosts the Users.
  - auth_tokens are obtained before making authenticated BuyItem call. Proving that non-auth users are getting the boot. proving that auth users are getting the right informatiom.
  - proving that the mocked Inventory in memory database is thread safe etc..
