@@ -128,7 +128,6 @@
     <Compile Include="Controllers\StoreControllerTest.cs" />
     <Compile Include="Integration\Against_Host_IntegrationTests.cs" />
     <Compile Include="Integration\Self_Hosted_IntegrationTests.cs" />
-    <Compile Include="Integration\TestWebApiResolver.cs" />
     <Compile Include="Integration\Token.cs" />
     <Compile Include="Models\InMemoryInventoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

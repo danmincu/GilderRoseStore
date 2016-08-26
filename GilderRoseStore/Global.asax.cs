@@ -15,6 +15,8 @@ namespace GilderRoseStore
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        #region NOT USED
+        //this was here originally - kept it for refference
         protected void Hosted_In_IIS_Application_Start()
         {
             var builder = new ContainerBuilder();
@@ -40,6 +42,7 @@ namespace GilderRoseStore
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        #endregion
 
         //modified for self host and ability to integration test
         protected void Application_Start()

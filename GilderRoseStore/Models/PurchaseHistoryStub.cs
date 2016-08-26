@@ -6,6 +6,9 @@ using System.Web;
 
 namespace GilderRoseStore.Models
 {
+    /// <summary>
+    /// simple implementation of the IPurchaseHistory 
+    /// </summary>
     public class PurchaseHistoryStub : IPurchaseHistory
     {
         public void AddEntry(string userName, Item item)

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GilderRoseStore.Tests.Integration
+﻿namespace GilderRoseStore.Tests.Integration
 {
+    // used to deserialize the JSON for Auth Token returned by the server call
     internal class Token
     {
         public string access_token { get; set; }

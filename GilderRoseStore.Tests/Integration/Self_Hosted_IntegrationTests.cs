@@ -7,91 +7,97 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
 using GilderRoseStore.Models;
-using GilderRoseStore.Providers;
 using Microsoft.Owin.Hosting;
-using Microsoft.Owin.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GilderRoseStore.Tests.Integration
 {
 
-    //SELF HOSTED INTEGRATION TESTS
-    //THEY ONLY RUN WHEN LOGGED IN AS ADMINISTRATOR
+    // SELF HOSTED INTEGRATION TESTS
+    // THEY ONLY RUN WHEN LOGGED IN AS ADMINISTRATOR - Please run Visual Studio as Admin than attempt to run these tests
 
     [TestClass]
     public class Self_Hosted_IntegrationTests
     {
         const int port = 9113;
-        const string userName = "test@test.com";
+        const string userName = "test_self_hosted@test.com";
         const string password = "GilderRose1@";
+        Token token;
 
-        private static IDisposable _webApp;
+        private static IDisposable webApp;
 
         [AssemblyInitialize]
         public static void SetUp(TestContext context)
         {
-            _webApp = WebApp.Start<Startup>(String.Format(CultureInfo.InvariantCulture,"http://*:{0}/",port));
-           
+            //spins the self hosted Web app
+            webApp = WebApp.Start<Startup>(String.Format(CultureInfo.InvariantCulture, "http://*:{0}/", port));
+
         }
 
         [AssemblyCleanup]
         public static void TearDown()
         {
-            _webApp.Dispose();
+            webApp.Dispose();
         }
 
         [TestInitialize]
         public void SetupTest()
         {
+            //Arrange
             InsureCreateUser();
+            this.token = GetToken(userName, password, port);
         }
 
         [TestMethod]
         public void Test_BadPassword()
-        {          
-            using (var httpClient = new HttpClient())
-            {
-                var token = GetToken(userName, password + "blah", port);
-                Assert.IsNull(token.access_token);
-            }
+        {
+            //Act
+            var token_for_bad_password = GetToken(userName, password + "blah", port);
+            //Assert
+            Assert.IsNull(token_for_bad_password.access_token);
         }
 
         [TestMethod]
         public void Test_GetInventory()
         {
-            var token = GetToken(userName, password, port);
+            //Act
             var result = GetInventory(token);
             var items = new JavaScriptSerializer().Deserialize<IEnumerable<Item>>(result.Item1);
-            Assert.IsNotNull(items);
-            Assert.IsTrue(items.Any());          
-        }
-
-        [TestMethod]
-        public void Test_GetInventoryWithNoAuth()
-        {         
-            var result = GetInventory(null);
-            var items = new JavaScriptSerializer().Deserialize<IEnumerable<Item>>(result.Item1);
+            //Assert that you get inventory items
             Assert.IsNotNull(items);
             Assert.IsTrue(items.Any());
         }
 
         [TestMethod]
-        public void Test_BuyWithNoAuth()
+        public void Test_GetInventory_With_NoAuth()
         {
+            //Act
+            var result = GetInventory(null);
+            var items = new JavaScriptSerializer().Deserialize<IEnumerable<Item>>(result.Item1);
+            //Assert that you get inventory items
+            Assert.IsNotNull(items);
+            Assert.IsTrue(items.Any());
+        }
+
+        [TestMethod]
+        public void Test_Buy_Item_WithNoAuth()
+        {
+            //Arrange
             var result = GetInventory(null);
             var items = new JavaScriptSerializer().Deserialize<IEnumerable<Item>>(result.Item1);
             Assert.IsNotNull(items);
             Assert.IsTrue(items.Any());
             var firstItemWithStock = items.FirstOrDefault(itm => itm.Quantity > 0);
             Assert.IsNotNull(firstItemWithStock);
+            //Act
             var resultPurchaseAttempt = BuyItem(firstItemWithStock.Id, null);
+            //Assert that the purchase failed because the lack of Authentication
             Assert.IsNotNull(resultPurchaseAttempt);
             Assert.AreEqual(resultPurchaseAttempt.Item2, HttpStatusCode.Unauthorized);
         }
 
-
         [TestMethod]
-        public void Test_BuyItemToDepleteStock()
+        public void Test_Buy_Item_Until_Deplete_The_Stock()
         {
             var result = GetInventory(null);
             var items = new JavaScriptSerializer().Deserialize<IEnumerable<Item>>(result.Item1);
@@ -99,31 +105,35 @@ namespace GilderRoseStore.Tests.Integration
             Assert.IsTrue(items.Any());
             var firstItemWithLargeStock = items.OrderByDescending(itm => itm.Quantity).FirstOrDefault(itm => itm.Quantity > 0 && itm.Quantity < 20);
             Assert.IsNotNull(firstItemWithLargeStock);
-            var token = GetToken(userName, password, port);
             Assert.IsNotNull(token.access_token);
+            //Act
             for (int i = 0; i < firstItemWithLargeStock.Quantity; i++)
             {
                 var resultPurchaseAttempt = BuyItem(firstItemWithLargeStock.Id, token);
+                //assert that the purchase succeeded 
                 Assert.IsNotNull(resultPurchaseAttempt);
                 Assert.AreEqual(resultPurchaseAttempt.Item2, HttpStatusCode.OK);
                 Assert.IsTrue(resultPurchaseAttempt.Item1.Equals("true", StringComparison.OrdinalIgnoreCase));
             }
+            //Act
             var depletedStockPurchaseAttempt = BuyItem(firstItemWithLargeStock.Id, token);
+            //Assert that the last buy attempt failed due to stock depletion
             Assert.IsNotNull(depletedStockPurchaseAttempt);
             Assert.AreEqual(depletedStockPurchaseAttempt.Item2, HttpStatusCode.OK);
             Assert.IsTrue(depletedStockPurchaseAttempt.Item1.Equals("false", StringComparison.OrdinalIgnoreCase));
         }
 
+        //using these "odd" tuples here rather than a poco because is all private method implementation - no-one outside this class cares
         private Tuple<string, System.Net.HttpStatusCode> BuyItem(Guid itemId, Token token)
         {
             return ClientApiGetCall(token, "http://localhost:{0}/api/store/{1}", port, itemId);
         }
-        
+
         private Tuple<string, System.Net.HttpStatusCode> GetInventory(Token token)
-        {           
+        {
             return ClientApiGetCall(token, "http://localhost:{0}/api/store", port);
         }
-        
+
         private Tuple<string, System.Net.HttpStatusCode> ClientApiGetCall(Token token, string uri, params object[] args)
         {
             using (var httpClient = new HttpClient())

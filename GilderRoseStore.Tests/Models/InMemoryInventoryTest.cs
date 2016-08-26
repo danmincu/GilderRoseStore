@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GilderRoseStore.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +13,7 @@ namespace GilderRoseStore.Tests.Models
         [TestMethod]
         public void Test_Constructor_RetrieveStock()
         {
+            //Arange
             var imi = new InMemoryInventory();
             //assert constructor works
             Assert.IsNotNull(imi);
@@ -23,7 +23,7 @@ namespace GilderRoseStore.Tests.Models
         }
 
         [TestMethod]
-        public void Test_BuyAnItemUntilTheStockIsEmpty()
+        public void Test_Buy_An_Item_Until_The_Stock_IsEmpty()
         {
             var imi = new InMemoryInventory();
             var firstLowStockItem = imi.Items.OrderBy(itm => itm.Quantity).FirstOrDefault();

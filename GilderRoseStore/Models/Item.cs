@@ -5,6 +5,9 @@ using System.Web;
 
 namespace GilderRoseStore.Models
 {
+    /// <summary>
+    /// the item for sale
+    /// </summary>
     public class Item
     {
         public Item()

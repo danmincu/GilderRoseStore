@@ -18,11 +18,15 @@ namespace GilderRoseStore
 {
     public partial class Startup
     {
+
+        #region NOT USED
+        //this was here originally - kept it for refference
         public void Hosted_in_IIS_Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
         }
-        
+        #endregion
+
         //modified for self host and ability to integration test
         public void Configuration(IAppBuilder app)
         {

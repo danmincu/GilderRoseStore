@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GilderRoseStore.Controllers;
 using System.Collections.Generic;
 using GilderRoseStore.Models;
@@ -11,7 +10,6 @@ namespace GilderRoseStore.Tests.Controllers
     [TestClass]
     public class StoreControllerTest
     {
-
         [TestMethod]
         public void Test_Store_Controller_Constructor()
         {
@@ -26,13 +24,12 @@ namespace GilderRoseStore.Tests.Controllers
         [TestMethod]
         public void Test_Store_Controller_GetInventory()
         {
+            // Arrange
             var inventory = MockRepository.Mock<IInventory>();
             var purchaseHistory = MockRepository.Mock<IPurchaseHistory>();
             var items = new List<Item>() { new Item { Name = "1" }, new Item { Name = "2" } };
-
             inventory.Expect(i => i.Items).Return(items).Repeat.Any();
-
-            // Arrange
+         
             StoreController controller = new StoreController(inventory, purchaseHistory);
 
             // Act
@@ -48,8 +45,9 @@ namespace GilderRoseStore.Tests.Controllers
         }
 
         [TestMethod]
-        public void Test_Store_Controller_BuyAnItem()
+        public void Test_Store_Controller_Buy_AnItem()
         {
+            // Arrange
             var inventory = MockRepository.Mock<IInventory>();
             var purchaseHistory = MockRepository.Mock<IPurchaseHistory>();
             var items = new List<Item>() { new Item { Name = "1", Quantity = 1 }, new Item { Name = "2" } };
@@ -59,9 +57,7 @@ namespace GilderRoseStore.Tests.Controllers
             inventory.Expect(i => i.Items).Return(items).Repeat.Any();
             Item itm;
             inventory.Expect(i => i.BuyItem(firstItem.Id, out itm)).OutRef(firstItem).Return(true).Repeat.Any();
-            
-
-            // Arrange
+                                    
             StoreController controller = new StoreController(inventory, purchaseHistory);
 
             // Act
@@ -70,6 +66,7 @@ namespace GilderRoseStore.Tests.Controllers
             // Assert
             Assert.IsTrue(result);
 
+            //insure that the purchase history was called and for the very item that was purchased
             purchaseHistory.AssertWasCalled(p => p.AddEntry(Arg<string>.Is.Anything, Arg<Item>.Is.Anything));
             var args = purchaseHistory.GetArgumentsForCallsMadeOn<IPurchaseHistory>( p => p.AddEntry(Arg<string>.Is.Anything, Arg<Item>.Is.Anything));
             Assert.IsTrue(args[0].Arguments[1] is Item);
@@ -77,9 +74,9 @@ namespace GilderRoseStore.Tests.Controllers
         }
 
         [TestMethod]
-
-        public void Test_Store_Controller_NoStock_Cannot_BuyAnItem()
+        public void Test_Store_Controller_NoStock_Cannot_Buy_AnItem()
         {
+            // Arrange
             var inventory = MockRepository.Mock<IInventory>();
             var purchaseHistory = MockRepository.Mock<IPurchaseHistory>();
             var items = new List<Item>() { new Item { Name = "1", Quantity = 0 }, new Item { Name = "2" } };
@@ -89,7 +86,6 @@ namespace GilderRoseStore.Tests.Controllers
             inventory.Expect(i => i.Items).Return(items).Repeat.Any();
             Item itm;
             inventory.Expect(i => i.BuyItem(firstItem.Id, out itm)).OutRef(firstItem).Return(false).Repeat.Any();
-
 
             // Arrange
             StoreController controller = new StoreController(inventory, purchaseHistory);
