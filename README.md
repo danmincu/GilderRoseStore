@@ -32,3 +32,8 @@ Running the code:
 -  Run the "against the host" integration tests. Make sure you run w/o debug the web app first (CTRL+F5)
 -  Run the "self host" integration tests. Make sure you run the Visual Studio in Administrator mode otherwise it won't spawn the process.
 
+what is happening in these tests? 
+ - crazy code coverage
+ - a "test user" is created the processes are spawning LocalDb catalogs to hosts the Users.
+ - auth_tokens are obtain befause making the Auth call. Proving that non auth users get the boot. proving that auth users get the right informatiom
+ - proving that the mocked Inventory in memory database is thread safe etc..
