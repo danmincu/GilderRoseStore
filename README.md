@@ -25,7 +25,7 @@ The app exposes two endpoints
 My focus is on Authorization / Testability both unit test and integration test / Dependecy Injection / Ability to self host
 and less focus on the business layer that would require a proper customer/orders/items/shopping cart/purchase history and a real database.
 
-Using: Asp.net Web Api, Owin self hosting, Microsoft Identity, EF, OAuth 2.0 (despite being required for OAuth 20 I didn't include https for simplicity)
+Using: Asp.net Web Api, Owin self hosting, Microsoft Identity, EF, OAuth 2.0 (despite being required for OAuth 20 I didn't include https for simplicity), RhinoMocks - for unit tests, AutoFac - for dependecy injection
 
 Running the code:
 -  Run the unit tests;
@@ -66,7 +66,7 @@ Running the code:
 ```
 what is happening in these tests? 
  - wicked code coverage
- - a "test@test.com" user with the password "GilderRose1@" is created & the processes are spawning LocalDb catalogs to hosts the Users.
+ - a couple of "test_***@test.com" users with the password "GilderRose1@" are created & the processes are spawning LocalDb catalogs to hosts the Users.
  - auth_tokens are obtained before making authenticated BuyItem call. Proving that non-auth users are getting the boot. proving that auth users are getting the right informatiom.
  - proving that the mocked Inventory in memory database is thread safe etc..
 
