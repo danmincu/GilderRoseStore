@@ -31,36 +31,36 @@ Running the code:
 -  Run the unit tests;
 -  Run the "against the host" integration tests. Make sure you run w/o debug the web app first (CTRL+F5)
 -  Run the "self host" integration tests. Make sure you run the Visual Studio in Administrator mode otherwise it won't spawn the process.
-- in the browser visit http://localhost:19683/api/Store to see the current inventory. WebApi looks in the header and returns XML or JSON. A java-scrip call will receive JSON however this is what chrome gets (the default for tests database)
+- in the browser visit [a link](http://localhost:19683/api/Store) to see the current inventory. WebApi looks in the header and returns XML or JSON. A java-scrip call will receive JSON however this is what chrome gets (the default for tests database)
 ```xml
 <ArrayOfItem xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/GilderRoseStore.Models">
 <Item>
-<Description>finest item4</Description>
-<Id>1d66cfe1-983b-4af2-85d1-7edea5f3b755</Id>
-<Name>item4</Name>
-<Price>3</Price>
-<Quantity>15</Quantity>
+ <Description>finest item4</Description>
+ <Id>1d66cfe1-983b-4af2-85d1-7edea5f3b755</Id>
+ <Name>item4</Name>
+ <Price>3</Price>
+ <Quantity>15</Quantity>
 </Item>
 <Item>
-<Description>finest item3</Description>
-<Id>1c10c048-28f5-426a-a286-a673d165c930</Id>
-<Name>item3</Name>
-<Price>4</Price>
-<Quantity>5</Quantity>
+ <Description>finest item3</Description>
+ <Id>1c10c048-28f5-426a-a286-a673d165c930</Id>
+ <Name>item3</Name>
+ <Price>4</Price>
+ <Quantity>5</Quantity>
 </Item>
 <Item>
-<Description>finest item2</Description>
-<Id>cb896034-0c56-4bd5-ac5d-3a26bcb41a1c</Id>
-<Name>item2</Name>
-<Price>5</Price>
-<Quantity>3</Quantity>
+ <Description>finest item2</Description>
+ <Id>cb896034-0c56-4bd5-ac5d-3a26bcb41a1c</Id>
+ <Name>item2</Name>
+ <Price>5</Price>
+ <Quantity>3</Quantity>
 </Item>
 <Item>
-<Description>finest item1</Description>
-<Id>086828a2-2945-4274-8c0c-d1b17ccad3ae</Id>
-<Name>item1</Name>
-<Price>10</Price>
-<Quantity>2</Quantity>
+ <Description>finest item1</Description>
+ <Id>086828a2-2945-4274-8c0c-d1b17ccad3ae</Id>
+ <Name>item1</Name>
+ <Price>10</Price>
+ <Quantity>2</Quantity>
 </Item>
 </ArrayOfItem>
 ```
