@@ -34,6 +34,21 @@ Running the code:
 
 what is happening in these tests? 
  - crazy code coverage
- - a "test user" is created the processes are spawning LocalDb catalogs to hosts the Users.
- - auth_tokens are obtain befause making the Auth call. Proving that non auth users get the boot. proving that auth users get the right informatiom
+ - a "test user" is created & the processes are spawning LocalDb catalogs to hosts the Users.
+ - auth_tokens are obtained befause making the Auth call. Proving that non-auth users are getting the boot. proving that auth users are getting the right informatiom.
  - proving that the mocked Inventory in memory database is thread safe etc..
+
+what stuff I didn't do but it would be a nice addition?
+  - paginating the call to get inventory. add some metadata to the return result with total count and a sample of items. subsequent calls will have to specify the range to get specific items.
+  - auding and logging.
+  - tracing for WebApi
+  - HTTPS - kind of a must however nobody wants to install bogus CERTs. Actually I did it at home is not a big deal to add http. some classes need small changes e.g.  OAuthAuthorizationServerOptions.AllowInsecureHttp = false etc.. plenty of examples on how to do it. next iteration will have it!
+  - full Customer/Orders/Items/Shopping cart. Biz objecst and everything stored into a proper database.
+  - the "buy" end point should/could specify the quantity
+  - a web page to exercise the end-points
+  - an example of using postman to get the bearer auth tokend plus an example of how to post for purchasing an item.
+  - a diagram of the project and the dataflow
+  
+I wrote all these needs and wants here beause hopefully the list will shrink as I add stuff to the project.
+
+ 
