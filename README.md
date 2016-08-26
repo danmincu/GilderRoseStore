@@ -81,6 +81,6 @@ what stuff I didn't do but it would be a nice addition?
   - an example of using postman to get the bearer auth tokend plus an example of how to post for purchasing an item.
   - a diagram of the project and the dataflow
   
-I wrote all these needs and wants here beause hopefully the list will shrink as I add stuff to the project.
+I wrote all these "needs and wants" here beause hopefully the list will shrink as I add stuff to the project.
 
  
