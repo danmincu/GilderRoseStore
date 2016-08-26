@@ -1,5 +1,5 @@
 # GilderRoseStore
-Story behind - The Gilded Rose Expands
+The story behind: The Gilded Rose Expands
 As you may know, the Gilded Rose* is a small inn in a prominent city that buys and sells only the finest items. The shopkeeper, Allison, is looking to expand by providing merchants in other cities with access to the shop's inventory via a public HTTP-accessible API.
 API requirements
 - Retrieve the current inventory (i.e. list of items)
@@ -27,6 +27,10 @@ My focus is on Authorization / Testability both unit test and integration test /
 and less focus on the business layer that would require a proper customer/orders/items/shopping cart/purchase history and a real database.
 
 Using: Asp.net Web Api, Owin self hosting, Microsoft Identity, EF, OAuth 2.0 (despite being required for OAuth 20 I didn't include https for simplicity), RhinoMocks - for unit tests, AutoFac - for dependecy injection
+
+Required explanations
+ - data format represents serialized items as XML/JSOJ. The reuqest is actually determines what format to be returned back. This is the most used dataformat in the industry. Example of request/response pending...
+ - Chosen authentication: OAuth JSON Web Tokens Authentication - a modern mechanism good for both local accounts and/or social media. To fully protect against the man-in-the-middle attacks it requires an HTTPS stack (not implemented here - could be easily upgraded however having a signed certificate is more costly)
 
 Running the code:
 ![alt_tag](https://github.com/danmincu/GilderRoseStore/blob/master/Tests.png)
