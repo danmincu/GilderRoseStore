@@ -19,7 +19,8 @@ class Item
 The app exposes two endpoints
 ```xml
   ..\api\store - retrieves the current inventory - list of items and the quantity
-  ..\api\store\get\{id} - buys and item from the store and decreases the current stock. Id represents the Guid Id of the desired item.
+  ..\api\store\get\{id} - purchases an item from store and decreases the current stock. 
+                          the Id represents the Guid of the desired item.
 ```
 
 My focus is on Authorization / Testability both unit test and integration test / Dependecy Injection / Ability to self host
@@ -27,9 +28,9 @@ and less focus on the business layer that would require a proper customer/orders
 
 Using: Asp.net Web Api, Owin self hosting, Microsoft Identity, EF, OAuth 2.0 (despite being required for OAuth 20 I didn't include https for simplicity), RhinoMocks - for unit tests, AutoFac - for dependecy injection
 
+Running the code:
 ![alt_tag](https://github.com/danmincu/GilderRoseStore/blob/master/Tests.png)
 
-Running the code:
 -  Run the unit tests;
 -  Run the "against the host" integration tests. Make sure you run w/o debug the web app first (CTRL+F5)
 -  Run the "self host" integration tests. Make sure you run the Visual Studio in Administrator mode otherwise it won't spawn the process.
@@ -50,20 +51,7 @@ Running the code:
      <Price>4</Price>
      <Quantity>5</Quantity>
   </Item>
-  <Item>
-     <Description>finest item2</Description>
-     <Id>cb896034-0c56-4bd5-ac5d-3a26bcb41a1c</Id>
-     <Name>item2</Name>
-     <Price>5</Price>
-     <Quantity>3</Quantity>
-  </Item>
-  <Item>
-     <Description>finest item1</Description>
-     <Id>086828a2-2945-4274-8c0c-d1b17ccad3ae</Id>
-     <Name>item1</Name>
-     <Price>10</Price>
-     <Quantity>2</Quantity>
-  </Item>
+  . . .
 </ArrayOfItem>
 ```
 
