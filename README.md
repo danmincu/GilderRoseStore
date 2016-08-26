@@ -34,34 +34,34 @@ Running the code:
 - in the browser visit [http://localhost:19683/api/Store](http://localhost:19683/api/Store) to see the current inventory. WebApi looks in the header and returns XML or JSON. A java-scrip call will receive JSON however this is what chrome gets (the default for tests database)
 ```xml
 <ArrayOfItem xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/GilderRoseStore.Models">
-<Item>
- <Description>finest item4</Description>
- <Id>1d66cfe1-983b-4af2-85d1-7edea5f3b755</Id>
- <Name>item4</Name>
- <Price>3</Price>
- <Quantity>15</Quantity>
-</Item>
-<Item>
- <Description>finest item3</Description>
- <Id>1c10c048-28f5-426a-a286-a673d165c930</Id>
- <Name>item3</Name>
- <Price>4</Price>
- <Quantity>5</Quantity>
-</Item>
-<Item>
- <Description>finest item2</Description>
- <Id>cb896034-0c56-4bd5-ac5d-3a26bcb41a1c</Id>
- <Name>item2</Name>
- <Price>5</Price>
- <Quantity>3</Quantity>
-</Item>
-<Item>
- <Description>finest item1</Description>
- <Id>086828a2-2945-4274-8c0c-d1b17ccad3ae</Id>
- <Name>item1</Name>
- <Price>10</Price>
- <Quantity>2</Quantity>
-</Item>
+  <Item>
+     <Description>finest item4</Description>
+     <Id>1d66cfe1-983b-4af2-85d1-7edea5f3b755</Id>
+     <Name>item4</Name>
+     <Price>3</Price>
+     <Quantity>15</Quantity>
+  </Item>
+  <Item>
+     <Description>finest item3</Description>
+     <Id>1c10c048-28f5-426a-a286-a673d165c930</Id>
+     <Name>item3</Name>
+     <Price>4</Price>
+     <Quantity>5</Quantity>
+  </Item>
+  <Item>
+     <Description>finest item2</Description>
+     <Id>cb896034-0c56-4bd5-ac5d-3a26bcb41a1c</Id>
+     <Name>item2</Name>
+     <Price>5</Price>
+     <Quantity>3</Quantity>
+  </Item>
+  <Item>
+     <Description>finest item1</Description>
+     <Id>086828a2-2945-4274-8c0c-d1b17ccad3ae</Id>
+     <Name>item1</Name>
+     <Price>10</Price>
+     <Quantity>2</Quantity>
+  </Item>
 </ArrayOfItem>
 ```
 what is happening in these tests? 
@@ -72,13 +72,12 @@ what is happening in these tests?
 
 what stuff I didn't do but it would be a nice addition?
   - paginating the call to get inventory. add some metadata to the return result with total count and a sample of items. subsequent calls will have to specify the range to get specific items.
-  - auding and logging.
-  - tracing for WebApi
-  - HTTPS - kind of a must however nobody wants to install bogus CERTs. Actually I did it at home is not a big deal to add http. some classes need small changes e.g.  OAuthAuthorizationServerOptions.AllowInsecureHttp = false etc.. plenty of examples on how to do it. next iteration will have it!
+  - auding and logging; tracing for WebApi
+  - HTTPS - kind of a must to clearly secure the communication and avoid tokens beind fethced, however nobody wants to install bogus CERTs. Actually I did it a test and is not extremely difficult to add https. some classes need small changes e.g.  OAuthAuthorizationServerOptions.AllowInsecureHttp = false etc.. plenty of examples on how to do it. next iteration will have it!
   - full Customer/Orders/Items/Shopping cart. Biz objecst and everything stored into a proper database.
-  - the "buy" end point should/could specify the quantity
-  - a web page to exercise the end-points
-  - an example of using postman to get the bearer auth tokend plus an example of how to post for purchasing an item.
+  - the buyItem end point should/could specify the quantity; for now calling the method buys one item if the stock is positive.
+  - a web page to allow the end users to call the end-points
+  - an example of using postman to get the bearer auth-token and an example of how to call buyItem with the auth-token for purchasing an item.
   - a diagram of the project and the dataflow
   
 I wrote all these "needs and wants" here beause hopefully the list will shrink as I add stuff to the project.
