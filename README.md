@@ -22,6 +22,9 @@ The app exposes two endpoints
   ..\api\store\get\{id} - buys and item from the store and decreases the current stock. Id represents the Guid Id of the desired item.
 ```
 
-I didn't focus on the business layer to add customer/orders/purchase history
+My focus is on Authorization / Testability both unit test and integration test / Dependecy Injection / Ability to self host
+and less focus on the business layer that would require a proper customer/orders/items/shopping cart/purchase history and a real database.
+
+Using: Asp.net Web Api, Owin self hosting, Microsoft Identity OAuth 2.0 (DESPITE BEING REQUIRED I DIDN'T ADD HTTPS FOR SIMPLICITY)
   
-Focus on Authorization / Testability / Dependecy Injection / Ability to self host
+
