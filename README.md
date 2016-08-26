@@ -25,6 +25,6 @@ The app exposes two endpoints
 My focus is on Authorization / Testability both unit test and integration test / Dependecy Injection / Ability to self host
 and less focus on the business layer that would require a proper customer/orders/items/shopping cart/purchase history and a real database.
 
-Using: Asp.net Web Api, Owin self hosting, Microsoft Identity OAuth 2.0 (DESPITE BEING REQUIRED I DIDN'T ADD HTTPS FOR SIMPLICITY)
+Using: Asp.net Web Api, Owin self hosting, Microsoft Identity, EF, OAuth 2.0 (despite being required for OAuth 20 I didn't include https for simplicity)
   
 
