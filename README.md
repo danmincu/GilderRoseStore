@@ -26,5 +26,9 @@ My focus is on Authorization / Testability both unit test and integration test /
 and less focus on the business layer that would require a proper customer/orders/items/shopping cart/purchase history and a real database.
 
 Using: Asp.net Web Api, Owin self hosting, Microsoft Identity, EF, OAuth 2.0 (despite being required for OAuth 20 I didn't include https for simplicity)
-  
+
+Running the code:
+-  Run the unit tests;
+-  Run the "against the host" integration tests. Make sure you run w/o debug the web app first (CTRL+F5)
+-  Run the "self host" integration tests. Make sure you run the Visual Studio in Administrator mode otherwise it won't spawn the process.
 
