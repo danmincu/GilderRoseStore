@@ -31,7 +31,7 @@ Running the code:
 -  Run the unit tests;
 -  Run the "against the host" integration tests. Make sure you run w/o debug the web app first (CTRL+F5)
 -  Run the "self host" integration tests. Make sure you run the Visual Studio in Administrator mode otherwise it won't spawn the process.
-- in the browser visit [a link](http://localhost:19683/api/Store) to see the current inventory. WebApi looks in the header and returns XML or JSON. A java-scrip call will receive JSON however this is what chrome gets (the default for tests database)
+- in the browser visit [http://localhost:19683/api/Store](http://localhost:19683/api/Store) to see the current inventory. WebApi looks in the header and returns XML or JSON. A java-scrip call will receive JSON however this is what chrome gets (the default for tests database)
 ```xml
 <ArrayOfItem xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/GilderRoseStore.Models">
 <Item>
