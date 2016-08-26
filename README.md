@@ -64,6 +64,8 @@ Running the code:
   </Item>
 </ArrayOfItem>
 ```
+[!alt_tag](https://github.com/danmincu/GilderRoseStore/blob/master/Tests.png)
+
 what is happening in these tests? 
  - wicked code coverage
  - a couple of "test_***@test.com" users with the password "GilderRose1@" are created & the processes are spawning LocalDb catalogs to hosts the Users.
