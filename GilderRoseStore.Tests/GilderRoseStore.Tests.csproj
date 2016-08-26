@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\StoreControllerTest.cs" />
+    <Compile Include="IntegrationTestAttribute.cs" />
     <Compile Include="Integration\Against_Host_IntegrationTests.cs" />
     <Compile Include="Integration\Self_Hosted_IntegrationTests.cs" />
     <Compile Include="Integration\Token.cs" />

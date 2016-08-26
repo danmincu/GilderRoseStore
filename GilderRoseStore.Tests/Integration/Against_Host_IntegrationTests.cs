@@ -18,7 +18,7 @@ namespace GilderRoseStore.Tests.Integration
     //Potential problem : running over and over agains the same host it will deplete item inventory and buy item tests will eventually fail
     //adding an option revert database is the solution however it exceeds the purpose of this exercise
 
-    [TestClass]
+    [TestClass]  
     public class Against_Host_IntegrationTests
     {
         const int port = 19683;
@@ -37,6 +37,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_GetInventory_With_NoAuth()
         {
             //Act
@@ -49,6 +50,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_Attempt_BuyItem_With_NoAuth()
         {
             //Act
@@ -67,6 +69,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_GetInventory_With_Auth()
         {
             //Arrange
@@ -82,6 +85,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_Buy_An_Item_Until_The_Stock_Is_Depleted()
         {
             //Arrange

@@ -49,6 +49,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_BadPassword()
         {
             //Act
@@ -58,6 +59,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_GetInventory()
         {
             //Act
@@ -69,6 +71,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_GetInventory_With_NoAuth()
         {
             //Act
@@ -80,6 +83,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_Buy_Item_WithNoAuth()
         {
             //Arrange
@@ -97,6 +101,7 @@ namespace GilderRoseStore.Tests.Integration
         }
 
         [TestMethod]
+        [IntegrationTest]
         public void Test_Buy_Item_Until_Deplete_The_Stock()
         {
             var result = GetInventory(null);
