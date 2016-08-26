@@ -22,26 +22,10 @@ namespace GilderRoseStore
         {
             ConfigureAuth(app);
         }
-
-        //public void Configuration1(IAppBuilder builder)
-        //{
-        //    HttpConfiguration config = new HttpConfiguration();
-        //    //config.Routes.MapHttpRoute("Default", "{controller}/{customerID}", new { controller = "Customer", customerID = RouteParameter.Optional });
-
-        //    config.Routes.MapHttpRoute(
-        //       name: "DefaultApi",
-        //       routeTemplate: "api/{controller}/{id}",
-        //       defaults: new { id = RouteParameter.Optional });
-
-
-        //   builder.UseWebApi(config);
-        //}
-
+        
         //modified for self host and ability to integration test
         public void Configuration(IAppBuilder app)
         {
-
-
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
