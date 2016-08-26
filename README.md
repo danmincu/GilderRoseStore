@@ -1,4 +1,4 @@
-# GilderRoseStore
+# GildedRoseStore
 The story behind: The Gilded Rose Expands
 As you may know, the Gilded Rose* is a small inn in a prominent city that buys and sells only the finest items. The shopkeeper, Allison, is looking to expand by providing merchants in other cities with access to the shop's inventory via a public HTTP-accessible API.
 API requirements
