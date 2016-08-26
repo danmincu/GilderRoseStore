@@ -25,7 +25,7 @@ namespace GilderRoseStore.Tests.Integration
     //adding an option revert database is the solution however it exceeds the purpose of this exercise
 
     [TestClass]
-    public class AgainstHostIntegrationTests
+    public class Against_Host_IntegrationTests
     {
         const int port = 19683;
         const string userName = "test@test.com";

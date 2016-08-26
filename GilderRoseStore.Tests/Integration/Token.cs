@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GilderRoseStore.Tests.Integration
 {
-    public class Token
+    internal class Token
     {
         public string access_token { get; set; }
         public string token_type { get; set; }

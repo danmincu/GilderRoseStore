@@ -19,7 +19,7 @@ namespace GilderRoseStore.Tests.Integration
     //THEY ONLY RUN WHEN LOGGED IN AS ADMINISTRATOR
 
     [TestClass]
-    public class SelfHostedIntegrationTests
+    public class Self_Hosted_IntegrationTests
     {
         const int port = 9113;
         const string userName = "test@test.com";
