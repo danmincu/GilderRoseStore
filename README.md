@@ -27,6 +27,8 @@ and less focus on the business layer that would require a proper customer/orders
 
 Using: Asp.net Web Api, Owin self hosting, Microsoft Identity, EF, OAuth 2.0 (despite being required for OAuth 20 I didn't include https for simplicity), RhinoMocks - for unit tests, AutoFac - for dependecy injection
 
+![alt_tag](https://github.com/danmincu/GilderRoseStore/blob/master/Tests.png)
+
 Running the code:
 -  Run the unit tests;
 -  Run the "against the host" integration tests. Make sure you run w/o debug the web app first (CTRL+F5)
@@ -64,7 +66,6 @@ Running the code:
   </Item>
 </ArrayOfItem>
 ```
-[!alt_tag](https://github.com/danmincu/GilderRoseStore/blob/master/Tests.png)
 
 what is happening in these tests? 
  - wicked code coverage
