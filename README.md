@@ -66,7 +66,7 @@ Running the code:
 ```
 what is happening in these tests? 
  - crazy code coverage
- - a "test@test.com" password "GilderRose1@" is created & the processes are spawning LocalDb catalogs to hosts the Users.
+ - a "test@test.com" user with password "GilderRose1@" is created & the processes are spawning LocalDb catalogs to hosts the Users.
  - auth_tokens are obtained befause making the Auth call. Proving that non-auth users are getting the boot. proving that auth users are getting the right informatiom.
  - proving that the mocked Inventory in memory database is thread safe etc..
 
