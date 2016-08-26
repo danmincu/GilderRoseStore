@@ -30,11 +30,15 @@ Using: Asp.net Web Api, Owin self hosting, Microsoft Identity, EF, OAuth 2.0 (de
 
 Required explanations
  - data format represents serialized items as XML/JSOJ. The reuqest is actually determines what format to be returned back. This is the most used dataformat in the industry. Example of request/response to obtain a token used for subsequent buy item requests
+ 
  ![alt_tag](https://github.com/danmincu/GilderRoseStore/blob/master/GetToken.png)
+
  - Chosen authentication: OAuth JSON Web Tokens Authentication - a modern mechanism good for both local accounts and/or social media. To fully protect against the man-in-the-middle attacks it requires an HTTPS stack (not implemented here - could be easily upgraded however having a signed certificate is more costly)
 
 Running the code:
+
 ![alt_tag](https://github.com/danmincu/GilderRoseStore/blob/master/Tests.png)
+
 
 -  Run the unit tests;
 -  Run the "against the host" integration tests. Make sure you run w/o debug the web app first (CTRL+F5)
