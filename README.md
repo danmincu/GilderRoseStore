@@ -77,7 +77,6 @@ what stuff I didn't do but it would be a nice addition?
   - full Customer/Orders/Items/Shopping cart. Biz objecst and everything stored into a proper database.
   - the buyItem end point should/could specify the quantity; for now calling the method buys one item if the stock is positive.
   - a web page to allow the end users to call the end-points
-  - an example of using postman to get the bearer auth-token and an example of how to call buyItem with the auth-token for purchasing an item.
   - a diagram of the project and the dataflow
   
 I wrote all these "needs and wants" here beause hopefully the list will shrink as I add stuff to the project.
